@@ -3,11 +3,14 @@ import os
 import time
 import psutil
 from datetime import datetime
+import pytz
 
 def htop(request):
     name = "K Adarsha Nayaka" 
     username = os.getenv("USER")  
-    server_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    ist = pytz.timezone('Asia/Kolkata')
+    server_time = datetime.now(ist).strftime('%Y-%m-%d %H:%M:%S')
 
     top_output = "\n".join([f"PID: {p.info['pid']}, Name: {p.info['name']}, User: {p.info['username']}" 
                             for p in psutil.process_iter(['pid', 'name', 'username'])])
